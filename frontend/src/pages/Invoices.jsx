@@ -303,7 +303,7 @@ export default function Invoices({ onLogout }) {
 
                 <div className="grid grid-cols-3 gap-4">
                   <div>
-                    <Label htmlFor="tax">Tax ($)</Label>
+                    <Label htmlFor="tax">Tax (₹)</Label>
                     <Input
                       id="tax"
                       data-testid="invoice-tax-input"
@@ -314,7 +314,7 @@ export default function Invoices({ onLogout }) {
                     />
                   </div>
                   <div>
-                    <Label htmlFor="discount">Discount ($)</Label>
+                    <Label htmlFor="discount">Discount (₹)</Label>
                     <Input
                       id="discount"
                       data-testid="invoice-discount-input"
