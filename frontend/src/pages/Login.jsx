@@ -83,20 +83,9 @@ export default function Login({ onLogin }) {
               className="w-full btn-primary text-white py-6 text-lg font-semibold rounded-xl"
               disabled={loading}
             >
-              {loading ? 'Processing...' : (isSignup ? 'Sign Up' : 'Sign In')}
+              {loading ? 'Processing...' : 'Sign In'}
             </Button>
           </form>
-
-          <div className="mt-6 text-center">
-            <button
-              data-testid="toggle-auth-mode"
-              type="button"
-              onClick={() => setIsSignup(!isSignup)}
-              className="text-cyan-700 hover:text-cyan-800 font-medium transition-colors"
-            >
-              {isSignup ? 'Already have an account? Sign in' : "Don't have an account? Sign up"}
-            </button>
-          </div>
         </div>
       </div>
     </div>
