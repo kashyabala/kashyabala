@@ -30,7 +30,13 @@ export default function Dashboard({ onLogout }) {
 
   useEffect(() => {
     fetchDashboardData();
+    checkAdminStatus();
   }, []);
+
+  const checkAdminStatus = () => {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    setIsAdmin(user.email === ADMIN_EMAIL);
+  };
 
   const fetchDashboardData = async () => {
     try {
