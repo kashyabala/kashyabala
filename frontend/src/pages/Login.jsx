@@ -10,11 +10,9 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
 export default function Login({ onLogin }) {
-  const [isSignup, setIsSignup] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
-    password: '',
-    name: ''
+    password: ''
   });
   const [loading, setLoading] = useState(false);
 
@@ -23,13 +21,8 @@ export default function Login({ onLogin }) {
     setLoading(true);
 
     try {
-      const endpoint = isSignup ? '/auth/signup' : '/auth/login';
-      const payload = isSignup 
-        ? { email: formData.email, password: formData.password, name: formData.name }
-        : { email: formData.email, password: formData.password };
-
-      const response = await axios.post(`${API}${endpoint}`, payload);
-      toast.success(isSignup ? 'Account created successfully!' : 'Welcome back!');
+      const response = await axios.post(`${API}/auth/login`, formData);
+      toast.success('Welcome back!');
       onLogin(response.data.token, response.data.user);
     } catch (error) {
       toast.error(error.response?.data?.detail || 'Authentication failed');
