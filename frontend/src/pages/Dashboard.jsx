@@ -61,6 +61,18 @@ export default function Dashboard({ onLogout }) {
     return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(amount);
   };
 
+  const handleCreateUser = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post(`${API}/auth/signup`, newUserForm);
+      toast.success('User created successfully!');
+      setSignupDialogOpen(false);
+      setNewUserForm({ name: '', email: '', password: '' });
+    } catch (error) {
+      toast.error(error.response?.data?.detail || 'Failed to create user');
+    }
+  };
+
   const statCards = stats ? [
     { title: 'Total Revenue', value: formatCurrency(stats.total_revenue), icon: DollarSign, color: 'bg-cyan-500', testId: 'stat-total-revenue' },
     { title: 'Paid Amount', value: formatCurrency(stats.paid_amount), icon: FileText, color: 'bg-green-500', testId: 'stat-paid-amount' },
