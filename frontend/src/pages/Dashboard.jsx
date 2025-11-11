@@ -90,9 +90,74 @@ export default function Dashboard({ onLogout }) {
   return (
     <Layout onLogout={onLogout}>
       <div className="space-y-8" data-testid="dashboard-page">
-        <div>
-          <h1 className="text-4xl font-bold text-gray-900 font-heading">Dashboard</h1>
-          <p className="text-gray-600 mt-2">Overview of your invoice management</p>
+        <div className="flex justify-between items-center">
+          <div>
+            <h1 className="text-4xl font-bold text-gray-900 font-heading">Dashboard</h1>
+            <p className="text-gray-600 mt-2">Overview of your invoice management</p>
+          </div>
+          
+          {/* Admin Only: Create User Button */}
+          {isAdmin && (
+            <Dialog open={signupDialogOpen} onOpenChange={setSignupDialogOpen}>
+              <DialogTrigger asChild>
+                <Button className="btn-primary text-white" data-testid="admin-create-user-button">
+                  <UserPlus className="w-4 h-4 mr-2" />
+                  Create New User
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle className="font-heading text-2xl">Create New User Account</DialogTitle>
+                </DialogHeader>
+                <form onSubmit={handleCreateUser} className="space-y-4">
+                  <div>
+                    <Label htmlFor="new-name">Full Name *</Label>
+                    <Input
+                      id="new-name"
+                      data-testid="admin-user-name-input"
+                      type="text"
+                      placeholder="John Doe"
+                      value={newUserForm.name}
+                      onChange={(e) => setNewUserForm({ ...newUserForm, name: e.target.value })}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="new-email">Email *</Label>
+                    <Input
+                      id="new-email"
+                      data-testid="admin-user-email-input"
+                      type="email"
+                      placeholder="user@example.com"
+                      value={newUserForm.email}
+                      onChange={(e) => setNewUserForm({ ...newUserForm, email: e.target.value })}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="new-password">Password *</Label>
+                    <Input
+                      id="new-password"
+                      data-testid="admin-user-password-input"
+                      type="password"
+                      placeholder="••••••••"
+                      value={newUserForm.password}
+                      onChange={(e) => setNewUserForm({ ...newUserForm, password: e.target.value })}
+                      required
+                    />
+                  </div>
+                  <div className="flex justify-end space-x-3 pt-4">
+                    <Button type="button" variant="outline" onClick={() => setSignupDialogOpen(false)}>
+                      Cancel
+                    </Button>
+                    <Button type="submit" className="btn-primary text-white" data-testid="admin-create-user-submit">
+                      Create User
+                    </Button>
+                  </div>
+                </form>
+              </DialogContent>
+            </Dialog>
+          )}
         </div>
 
         {/* Stats Cards */}
