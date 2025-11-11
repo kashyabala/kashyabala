@@ -35,9 +35,12 @@ export default function Dashboard({ onLogout }) {
 
   const checkAdminStatus = () => {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
-    console.log('Current user:', user);
-    console.log('Admin email check:', user.email, '===', ADMIN_EMAIL, '=', user.email === ADMIN_EMAIL);
-    setIsAdmin(user.email === ADMIN_EMAIL);
+    const adminStatus = user.email === ADMIN_EMAIL;
+    console.log('Admin status:', adminStatus, 'for user:', user.email);
+    setIsAdmin(adminStatus);
+    if (adminStatus) {
+      console.log('✅ Admin access granted!');
+    }
   };
 
   const fetchDashboardData = async () => {
