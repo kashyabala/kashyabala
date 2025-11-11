@@ -35,6 +35,8 @@ export default function Dashboard({ onLogout }) {
 
   const checkAdminStatus = () => {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
+    console.log('Current user:', user);
+    console.log('Admin email check:', user.email, '===', ADMIN_EMAIL, '=', user.email === ADMIN_EMAIL);
     setIsAdmin(user.email === ADMIN_EMAIL);
   };
 
