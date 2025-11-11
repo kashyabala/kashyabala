@@ -45,26 +45,10 @@ export default function Login({ onLogin }) {
             Invoice Hub
           </h1>
           <p className="text-center text-gray-600 mb-8">
-            {isSignup ? 'Create your account' : 'Sign in to your account'}
+            Sign in to your account
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-4">
-            {isSignup && (
-              <div>
-                <Label htmlFor="name" className="text-gray-700">Full Name</Label>
-                <Input
-                  id="name"
-                  data-testid="signup-name-input"
-                  type="text"
-                  placeholder="John Doe"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  required
-                  className="mt-1"
-                />
-              </div>
-            )}
-            
             <div>
               <Label htmlFor="email" className="text-gray-700">Email</Label>
               <Input
