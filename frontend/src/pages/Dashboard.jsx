@@ -3,18 +3,30 @@ import axios from 'axios';
 import { toast } from 'sonner';
 import Layout from '@/components/Layout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { DollarSign, FileText, Clock, AlertCircle } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { DollarSign, FileText, Clock, AlertCircle, UserPlus } from 'lucide-react';
 import { LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
 const COLORS = ['#10b981', '#3b82f6', '#6b7280', '#ef4444'];
+const ADMIN_EMAIL = 'kashyabalaa@gmail.com';
 
 export default function Dashboard({ onLogout }) {
   const [stats, setStats] = useState(null);
   const [chartData, setChartData] = useState(null);
   const [recentInvoices, setRecentInvoices] = useState([]);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [signupDialogOpen, setSignupDialogOpen] = useState(false);
+  const [newUserForm, setNewUserForm] = useState({
+    name: '',
+    email: '',
+    password: ''
+  });
 
   useEffect(() => {
     fetchDashboardData();
